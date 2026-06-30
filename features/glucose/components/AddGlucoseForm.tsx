@@ -7,7 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-export default function AddGlucoseForm() {
+interface AddGlucoseFormProps {
+  onSaved: () => void;
+}
+
+export default function AddGlucoseForm({
+  onSaved,
+}: AddGlucoseFormProps) {
   const [glucose, setGlucose] = useState("");
   const [readingType, setReadingType] = useState("Fasting");
   const [notes, setNotes] = useState("");
@@ -35,6 +41,7 @@ export default function AddGlucoseForm() {
     }
 
     setMessage("✅ Glucose reading saved successfully!");
+    onSaved();
 
     setGlucose("");
     setNotes("");

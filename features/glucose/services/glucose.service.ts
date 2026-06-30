@@ -25,3 +25,22 @@ export async function addGlucoseReading(data: {
     recorded_at: data.recorded_at,
   });
 }
+
+export async function getGlucoseReadings() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("User not authenticated.");
+  }
+
+  return await supabase
+    .from("glucose_logs")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("recorded_at", { ascending: false });
+}
