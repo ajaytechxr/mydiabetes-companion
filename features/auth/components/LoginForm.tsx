@@ -21,7 +21,7 @@ export default function LoginForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+console.log("Login button clicked");
     setLoading(true);
     setError("");
 
